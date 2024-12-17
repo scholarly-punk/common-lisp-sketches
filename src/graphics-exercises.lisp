@@ -160,9 +160,7 @@
 	     "Turns off the light indicated by the symbol 'green, 'yellow or 'red."
 	     (draw-shape
 	      (make-circle :center (make-point-2d :x x-bulbs
-						  :y (cond ((eq light-colour +red+) y-red)
-							   ((eq light-colour +yellow+) y-yellow)
-							   ((eq light-colour +green+) y-green)))
+						  :y (y-coordinate light-colour))
 			   :radius bulb-radius
 			   :colour light-colour)))
 
@@ -170,11 +168,14 @@
 	     "Turns on the light indicated by the symbol 'green, 'yellow or 'red."
 	     (draw-shape
 	      (make-solid-disk :center (make-point-2d :x x-bulbs
-						      :y (cond ((eq light-colour +red+) y-red)
-							       ((eq light-colour +yellow+) y-yellow)
-							       ((eq light-colour +green+) y-green)))
+						      :y (y-coordinate light-colour))
 			       :radius bulb-radius
 			       :colour light-colour)))
+
+	   (y-coordinate (light-colour)
+	     (cond ((eq light-colour +red+) y-red)
+		   ((eq light-colour +yellow+) y-yellow)
+		   ((eq light-colour +green+) y-green)))
 	   
 	   (switch (current-colour next-colour other-colour)
 	     "Turns off the current colour, turns on the next colour"
